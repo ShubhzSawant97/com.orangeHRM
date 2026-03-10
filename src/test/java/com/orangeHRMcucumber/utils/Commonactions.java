@@ -1,6 +1,8 @@
 package com.orangeHRMcucumber.utils;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +17,7 @@ public class Commonactions {
 	
 	public Commonactions(WebDriver driver) {
 		this.driver = driver;
-		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 	}
 
 	
@@ -45,6 +47,13 @@ public class Commonactions {
 			return false;
 			
 		}
+	}
+	
+	public String verifySearchResult(WebElement elm, WebElement spinner){
+		wait.until(ExpectedConditions.invisibilityOf(spinner));
+		String users = elm.getText();
+		System.out.println(users);
+		return users;
 	}
 	
 

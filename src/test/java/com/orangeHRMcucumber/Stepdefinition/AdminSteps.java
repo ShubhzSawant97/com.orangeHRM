@@ -45,10 +45,6 @@ public class AdminSteps {
 		Assert.assertTrue(admin.verifynav());
 	}
 
-	@When("user clicks on Admin tab")
-	public void user_clicks_on_Admin_tab() {
-		admin.clickAdmintab();
-	}
 
 	@When("user adds the following system users")
 	public void user_adds_the_following_system_users(DataTable dataTable) {
@@ -71,5 +67,27 @@ public class AdminSteps {
 	public void user_successfully_gets_created() {
 		System.out.println("User created");
 	}
+	
+	@Given("user enters with the existing username")
+	public void user_enters_with_the_existing_username() {
+	  admin.EnterUserName(config.GetUsername());
+	}
+	@When("select the user role")
+	public void select_the_user_role() {
+	    admin.Userrole(config.getUserRole());
+	}
+	
+	@When("user clicks on search button")
+	public void user_clicks_on_search_button() {
+		 admin.clickOnSearch();
+	}
+	
+	@Then("result should be shown")
+	public void result_should_be_shown() {
+		Assert.assertEquals("Admin", admin.verifySearchResult());	
+	}
+	
+	
+
 
 }

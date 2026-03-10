@@ -41,5 +41,11 @@ public class ReadConfig {
 			throw new RuntimeException();
 		}
 	}
+	
+	public String getUserRole() {
+	String Userrole = prop.getProperty("Userrole");
+	return Userrole;
+		
+	}
 
 }
