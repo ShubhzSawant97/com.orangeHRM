@@ -49,9 +49,6 @@ public class Stepdefinition {
 			Assert.assertTrue(lp.VerifyInvalidnav());
 		}
 	}
-
-	
-	
 	
 
 	
