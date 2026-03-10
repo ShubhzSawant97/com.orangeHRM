@@ -1,6 +1,8 @@
 package com.orangeHRMcucumber.pages;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -20,7 +22,7 @@ public class Adminpage {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 		ca = new Commonactions(driver);
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 	}
 	@FindBy (xpath="//span[text()='Admin']") private WebElement Admintab;
 	
@@ -45,6 +47,12 @@ public class Adminpage {
 	@FindBy (xpath = "(//input[@type='password'])[2]") WebElement SelectConfirmPassword;
 
 	@FindBy (xpath = "//button[normalize-space()='Save']") private WebElement Saveuser;
+	
+	@FindBy (xpath = "//div[@role='row']") private List<WebElement> SearchRsults;
+	
+	@FindBy (xpath = "//div[@class='oxd-loading-spinner-container']") private WebElement Spinner;
+	
+	@FindBy (xpath = "(//div[@class='oxd-table-cell oxd-padding-cell'])[2]") private WebElement AdminSearchResult;
 	
 	public void Enterusername(String username) {
 	ca.enterinput(UsernameInput, "Username entered", username);	
@@ -73,6 +81,7 @@ public class Adminpage {
 	public boolean verifyusercreationnav() {
 		return ca.verifynav("admin/saveSystemUser");	
 	}
+	
 
 	public void Userrole(String role) {
 		ca.elmclick(UserRoleDropdown, "Role selected successfully: "+role);
@@ -106,5 +115,14 @@ public class Adminpage {
 	
 	public void ClickOnSave() {
 		ca.elmclick(Saveuser, "User saved:");
+	} 
+	
+	public void clickOnSearch() {
+		ca.elmclick(SubmitButton, "User searched");
+	}
+	
+	public String verifySearchResult(){
+		return ca.verifySearchResult(AdminSearchResult, Spinner);
+		
 	}
 }
