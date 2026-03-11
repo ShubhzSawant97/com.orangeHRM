@@ -16,10 +16,19 @@ When user adds the following system users
 | ESS   | James | Enabled | f@gmail.com | Testing1! | Testing1! |
 Then user successfully gets created
 
-@smoke
+
 @order4
 Scenario: Search for user 
 Given user enters with the existing username
 When select the user role
 And user clicks on search button
 Then result should be shown
+
+@smoke
+@order5
+Scenario: Edit the user 
+Given user searches for existing username
+When user clicks on Edit button
+And user enters all the details
+And user clicks on save button
+Then user edit successfully
