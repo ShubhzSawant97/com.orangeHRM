@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -17,7 +18,7 @@ public class Commonactions {
 	
 	public Commonactions(WebDriver driver) {
 		this.driver = driver;
-		wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		wait = new WebDriverWait(driver, Duration.ofSeconds(40));
 	}
 
 	
@@ -33,6 +34,7 @@ public class Commonactions {
 	public void enterinput(WebElement elm, String msg, String value) {
 		try {
 		wait.until(ExpectedConditions.visibilityOf(elm));
+		elm.clear();
 		elm.sendKeys(value);
 		}catch(Exception e) {
 			throw new RuntimeException(e.getMessage());
@@ -56,5 +58,13 @@ public class Commonactions {
 		return users;
 	}
 	
+	public String getToastMessage(By toast) {
+	    WebElement toastElement = wait.until(
+	        ExpectedConditions.visibilityOfElementLocated(toast)
+	    );
+	    String message = toastElement.getText();
+	    System.out.println("Toast Message: " + message);
+	    return message;
+	}
 
 }

@@ -54,6 +54,9 @@ public class Adminpage {
 	
 	@FindBy (xpath = "(//div[@class='oxd-table-cell oxd-padding-cell'])[2]") private WebElement AdminSearchResult;
 	
+	@FindBy (xpath = "//i[@class='oxd-icon bi-pencil-fill']") private WebElement EditPencilButton;
+	
+	private By successToast =By.xpath ("//p[contains(@class,'toast-message')]");
 	public void Enterusername(String username) {
 	ca.enterinput(UsernameInput, "Username entered", username);	
 	}
@@ -89,9 +92,9 @@ public class Adminpage {
 		driver.findElement(roleOption).click();
 	}
 	
-	public void EmployerName(String Employername) {
-		ca.enterinput(SelectEmployerName, "EmployeeName entered: ", Employername);
-		By Suggestion = By.xpath("//div[@role='listbox']//span[contains(text(),'"+Employername+"')]");
+	public void EmployeeName(String Employeename) {
+		ca.enterinput(SelectEmployerName, "EmployeeName entered: ", Employeename);
+		By Suggestion = By.xpath("//div[@role='listbox']//span[contains(text(),'"+Employeename+"')]");
 		driver.findElement(Suggestion).click();
 	}
 	
@@ -99,7 +102,7 @@ public class Adminpage {
 		ca.elmclick(SelectStatus, "Status input field clicked");
 		By statusselection = By.xpath("//div[@role='listbox']//span[text()='"+Status+"']");
 		driver.findElement(statusselection).click();
-	}
+	} 
 	
 	public void EnterUserName(String username) {
 		ca.enterinput(SelectUserName, "Username Entered: ", username);
@@ -123,6 +126,13 @@ public class Adminpage {
 	
 	public String verifySearchResult(){
 		return ca.verifySearchResult(AdminSearchResult, Spinner);
-		
+	}
+	
+	public void clickOnEditbutton() {
+		ca.verifySearchResult(AdminSearchResult, Spinner);
+		ca.elmclick(EditPencilButton, "User clicked on Edit button");
+	}
+	public String verifytoastmsg() {
+		return ca.getToastMessage(successToast);
 	}
 }

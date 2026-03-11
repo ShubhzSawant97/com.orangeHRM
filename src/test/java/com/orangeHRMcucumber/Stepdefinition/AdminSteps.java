@@ -53,7 +53,7 @@ public class AdminSteps {
 			admin.clickAddbutton();
 			
 			admin.Userrole(row.get("UserRole"));
-			admin.EmployerName(row.get("EmployeeName"));
+			admin.EmployeeName(row.get("EmployeeName"));
 			admin.SelectStatus(row.get("Status"));
 			admin.EnterUserName(row.get("UserName"));
 			admin.EnterUserPassword(row.get("Password"));
@@ -87,7 +87,31 @@ public class AdminSteps {
 		Assert.assertEquals("Admin", admin.verifySearchResult());	
 	}
 	
-	
+	@Given("user searches for existing username")
+	public void user_searches_for_existing_username() {
+	   admin.EnterUserName(config.GetUsername());
+	   admin.clickOnSearch();
+	}
+	@When("user clicks on Edit button")
+	public void user_clicks_on_edit_button() {
+	admin.clickOnEditbutton();
+	}
+	@When("user enters all the details")
+	public void user_enters_all_the_details() {
+	   admin.EmployeeName("James");
+	   admin.EnterUserName("Chadmin");
+	   
+	}
+	@When("user clicks on save button")
+	public void user_clicks_on_save_button() {
+	  admin.ClickOnSave();
+	}
+	@Then("user edit successfully")
+	public void user_edit_successfully() {
+	  String msg = admin.verifytoastmsg();
+	  Assert.assertEquals(msg,"Successfully Updated");
+	}
+
 
 
 }
