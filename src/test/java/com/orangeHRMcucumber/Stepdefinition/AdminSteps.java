@@ -1,8 +1,10 @@
 package com.orangeHRMcucumber.Stepdefinition;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.poi.EncryptedDocumentException;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
@@ -131,6 +133,19 @@ public class AdminSteps {
 	public void user_should_be_deleted_successfully() {
 		String DeleteToastmsg = admin.verifydeletetoast();
 		Assert.assertEquals(DeleteToastmsg, "Successfully Deleted");
+	}
+	
+	@Given("user extracts all records from the admin user table")
+	public void user_extracts_all_records_from_the_admin_user_table() {
+	    admin.adminuserlist();
+	}
+	@When("user writes the records into an Excel file")
+	public void user_writes_the_records_into_an_excel_file() throws EncryptedDocumentException, IOException {
+	 admin.writetoexcel(); 
+	}
+	@Then("Excel file should contain all user details")
+	public void excel_file_should_contain_all_user_details() {
+	   System.out.println("v");
 	}
 
 }

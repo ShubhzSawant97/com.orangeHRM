@@ -10,7 +10,7 @@ import io.cucumber.junit.CucumberOptions;
 		features = "src/test/resources/Feature",
 		glue = {"com.orangeHRMcucumber"},
 		dryRun = false ,
-		tags = "@smoke",
+		tags = "",
 		monochrome = false,
 		plugin = {"pretty", 
         "html:target/cucumber-report.html",

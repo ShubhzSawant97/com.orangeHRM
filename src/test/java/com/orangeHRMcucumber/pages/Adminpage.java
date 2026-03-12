@@ -1,9 +1,12 @@
 package com.orangeHRMcucumber.pages;
 
+import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.poi.EncryptedDocumentException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -81,6 +84,10 @@ public class Adminpage {
 	private By successToast = By.xpath("//p[contains(@class,'toast-message')]");
 	
 	private By DeleteToast = By.xpath("//p[text()='Successfully Deleted']");
+	
+	@FindBy(xpath = "//div[@class='oxd-table-body']//div[@role='row']") private List <WebElement> userlistrows;
+	
+	@FindBy(xpath = "//div[@class='oxd-table-header']//div[@role='columnheader']") private List <WebElement> headers;
 
 	public void Enterusername(String username) {
 		ca.enterinput(UsernameInput, "Username entered", username);
@@ -171,4 +178,17 @@ public class Adminpage {
 	public String verifydeletetoast() {
 		return ca.getToastMessage(DeleteToast);
 	}
+	
+	public List<Map<String, String>> adminuserlist(){
+	 List<WebElement> dataRows = userlistrows.subList(1, userlistrows.size());
+
+		return ca.listvalues(userlistrows,headers);
+		
+	}
+	
+	public void writetoexcel() throws EncryptedDocumentException, IOException {
+		  List<Map<String,String>> tableData = ca.listvalues(userlistrows, headers);
+		  ca.WriteExcel(tableData);
+	}
+	
 }
