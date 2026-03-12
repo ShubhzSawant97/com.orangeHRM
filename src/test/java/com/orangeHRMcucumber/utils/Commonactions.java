@@ -1,9 +1,20 @@
 package com.orangeHRMcucumber.utils;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -66,5 +77,56 @@ public class Commonactions {
 	    System.out.println("Toast Message: " + message);
 	    return message;
 	}
+		
+		public List<Map<String,String>> listvalues(List<WebElement> rows, List<WebElement> headers){
+		
+			List<Map<String,String>> table = new ArrayList<>();
+			for (WebElement row: rows) {
+				List<WebElement> cells  = wait.until(ExpectedConditions.visibilityOfAllElements( row.findElements(By.xpath(".//div[@role='cell']"))));
+				Map<String,String> data = new LinkedHashMap<>();
+				for(int i =1; i<cells.size();i++) {
+					String header = headers.get(i).getText();
+					String value = cells.get(i).getText();
+					
+					data.put(header,value);	
+				}
+				
+				table.add(data);
+			}
+			System.out.println(table);
+			return table;
+		}
+	
+	public void WriteExcel(List<Map<String,String>> data) throws EncryptedDocumentException, IOException {
+		String path = System.getProperty("user.dir")+ "/src/test/resources/testData/UserData.xlsx";
+		FileInputStream fs = new FileInputStream(path);
+		Workbook wb = WorkbookFactory.create(fs);
+		Sheet sheet = wb.getSheet("Sheet1");
+		
+		int rownum = 0;
+		Row header = sheet.createRow(rownum++);
+		
+		int cellnum = 0;
+		for (String key : data.get(0).keySet()) {
+			 header.createCell(cellnum++).setCellValue(key);
+		}
+		
+		  for(Map<String,String> map : data){
 
+		        Row row = sheet.createRow(rownum++);
+		        cellnum = 0;
+
+		        for(String value : map.values()){
+		            row.createCell(cellnum++).setCellValue(value);
+		        }
+		    }
+		  FileOutputStream fos = new FileOutputStream(path);
+		    wb.write(fos);
+
+		    fos.close();
+		    wb.close();
+	}
+	
+	
+ 
 }
