@@ -18,6 +18,7 @@ This project is a **Selenium Automation Framework** built for the OrangeHRM appl
 - Reusable utility classes
 - Explicit waits for stable test execution
 - Generic methods for extracting UI table data
+- Data table And Scenrio outline
 
 ## Test Scenarios Covered
 - Login functionality
