@@ -31,11 +31,26 @@ Feature: Admin functionality
     And user clicks on save button
     Then user edit successfully
 
-@smoke
   @order6
   Scenario: Delete the user
-    Given user Enters the  username "aman_tester2"
+    Given user Enters the  username "bbauqgmq"
     When user clicks on search button
     And user clicks on delete button for the selected user
     And user confirms the delete action
     Then user should be deleted successfully
+
+
+  @order7
+  Scenario: Export user list to Excel
+    Given user extracts all records from the admin user table
+    When user writes the records into an Excel file
+    Then Excel file should contain all user details
+
+    
+    @order8
+    Scenario:User create new job
+    Given User clicks on the job titles
+    When user clicks on Edit button
+    And user clicks on Edit button
+    And User enter the job details
+    Then User save the job successfully
