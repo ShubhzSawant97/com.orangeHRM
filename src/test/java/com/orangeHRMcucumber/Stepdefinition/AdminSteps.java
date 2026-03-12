@@ -26,7 +26,6 @@ public class AdminSteps {
 		config = new ReadConfig();
 	}
 
-
 	@Given("user logs into the application")
 	public void user_logs_into_the_application() {
 		admin.Enterusername(config.GetUsername());
@@ -45,20 +44,19 @@ public class AdminSteps {
 		Assert.assertTrue(admin.verifynav());
 	}
 
-
 	@When("user adds the following system users")
 	public void user_adds_the_following_system_users(DataTable dataTable) {
-		List<Map<String, String>> data = dataTable.asMaps(String.class,String.class);
-		for(Map<String, String> row: data) {
+		List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+		for (Map<String, String> row : data) {
 			admin.clickAddbutton();
-			
+
 			admin.Userrole(row.get("UserRole"));
 			admin.EmployeeName(row.get("EmployeeName"));
 			admin.SelectStatus(row.get("Status"));
 			admin.EnterUserName(row.get("UserName"));
 			admin.EnterUserPassword(row.get("Password"));
 			admin.EnterUserConfirmPassword(row.get("ConfirmPassword"));
-			
+
 			admin.ClickOnSave();
 		}
 	}
@@ -67,51 +65,72 @@ public class AdminSteps {
 	public void user_successfully_gets_created() {
 		System.out.println("User created");
 	}
-	
+
 	@Given("user enters with the existing username")
 	public void user_enters_with_the_existing_username() {
-	  admin.EnterUserName(config.GetUsername());
+		admin.EnterUserName(config.GetUsername());
 	}
+
 	@When("select the user role")
 	public void select_the_user_role() {
-	    admin.Userrole(config.getUserRole());
+		admin.Userrole(config.getUserRole());
 	}
-	
+
 	@When("user clicks on search button")
 	public void user_clicks_on_search_button() {
-		 admin.clickOnSearch();
+		admin.clickOnSearch();
 	}
-	
+
 	@Then("result should be shown")
 	public void result_should_be_shown() {
-		Assert.assertEquals("Admin", admin.verifySearchResult());	
+		Assert.assertEquals("Admin", admin.verifySearchResult());
 	}
-	
+
 	@Given("user searches for existing username")
 	public void user_searches_for_existing_username() {
-	   admin.EnterUserName(config.GetUsername());
-	   admin.clickOnSearch();
+		admin.EnterUserName(config.GetUsername());
+		admin.clickOnSearch();
 	}
+
 	@When("user clicks on Edit button")
 	public void user_clicks_on_edit_button() {
-	admin.clickOnEditbutton();
+		admin.clickOnEditbutton();
 	}
+
 	@When("user enters all the details")
 	public void user_enters_all_the_details() {
-	   admin.EmployeeName("James");
-	   admin.EnterUserName("Chadmin");
-	   
+		admin.EmployeeName("James");
+		admin.EnterUserName("Chadmin");
+
 	}
+
 	@When("user clicks on save button")
 	public void user_clicks_on_save_button() {
-	  admin.ClickOnSave();
+		admin.ClickOnSave();
 	}
+
 	@Then("user edit successfully")
 	public void user_edit_successfully() {
-	  String msg = admin.verifytoastmsg();
-	  Assert.assertEquals(msg,"Successfully Updated");
+		String msg = admin.verifytoastmsg();
+		Assert.assertEquals(msg, "Successfully Updated");
 	}
-
-
+	
+	@Given("user Enters the  username {string}")
+	public void user_Enters_the_username(String username) {
+		admin.EnterUserName(username);
+	}
+	@When("user clicks on delete button for the selected user")
+	public void user_clicks_on_delete_button_for_the_selected_user() {
+	    admin.deleteuser();
+	}
+	@When("user confirms the delete action")
+	public void user_confirms_the_delete_action() {
+	    admin.confirmdelete();
+	}
+	@Then("user should be deleted successfully")
+	public void user_should_be_deleted_successfully() {
+		String DeleteToastmsg = admin.verifydeletetoast();
+		Assert.assertEquals(DeleteToastmsg, "Successfully Deleted");
+	}
 
 }
