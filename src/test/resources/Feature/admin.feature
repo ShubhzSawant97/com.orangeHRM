@@ -33,7 +33,7 @@ Feature: Admin functionality
 
   @order6
   Scenario: Delete the user
-    Given user Enters the  username "bbauqgmq"
+    Given user Enters the  username "Abdulhakee1"
     When user clicks on search button
     And user clicks on delete button for the selected user
     And user confirms the delete action
@@ -46,11 +46,10 @@ Feature: Admin functionality
     When user writes the records into an Excel file
     Then Excel file should contain all user details
 
-    
+    @smoke
     @order8
     Scenario:User create new job
-    Given User clicks on the job titles
-    When user clicks on Edit button
-    And user clicks on Edit button
-    And User enter the job details
-    Then User save the job successfully
+    Given user clicks on the job titles
+    When user clicks on Add button
+    And user enter the job details
+    Then user save the job successfully
