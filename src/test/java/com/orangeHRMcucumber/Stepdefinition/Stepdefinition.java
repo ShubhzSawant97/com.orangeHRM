@@ -1,5 +1,8 @@
 package com.orangeHRMcucumber.Stepdefinition;
 
+import java.io.IOException;
+
+import org.apache.poi.EncryptedDocumentException;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
@@ -14,7 +17,7 @@ public class Stepdefinition {
 	private WebDriver driver;
 	private Loginpage lp;
 
-	public Stepdefinition(Base base) {
+	public Stepdefinition(Base base) throws EncryptedDocumentException, IOException {
 		this.driver = base.getDriver();
 		this.lp = new Loginpage(driver);
 	}

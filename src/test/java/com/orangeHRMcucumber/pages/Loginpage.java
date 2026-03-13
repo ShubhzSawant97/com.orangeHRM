@@ -1,5 +1,8 @@
 package com.orangeHRMcucumber.pages;
 
+import java.io.IOException;
+
+import org.apache.poi.EncryptedDocumentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,7 +14,7 @@ public class Loginpage {
 	protected WebDriver driver;
 	protected Commonactions ca;
 
-	public Loginpage(WebDriver driver) {
+	public Loginpage(WebDriver driver) throws EncryptedDocumentException, IOException {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 		ca = new Commonactions(driver);
