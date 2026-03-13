@@ -20,7 +20,7 @@ public class Adminpage {
 	protected PageFactory pf;
 	protected Commonactions ca;
 
-	public Adminpage(WebDriver driver) {
+	public Adminpage(WebDriver driver) throws EncryptedDocumentException, IOException {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 		ca = new Commonactions(driver);
@@ -88,6 +88,18 @@ public class Adminpage {
 	@FindBy(xpath = "//div[@class='oxd-table-body']//div[@role='row']") private List <WebElement> userlistrows;
 	
 	@FindBy(xpath = "//div[@class='oxd-table-header']//div[@role='columnheader']") private List <WebElement> headers;
+	
+	@FindBy(xpath="//span[text()='Job ']") private WebElement jobdropdown;
+	
+	@FindBy(xpath="//a[contains(text(),'Job Titles')]") private WebElement jobtitle;
+	
+	@FindBy(xpath="//label[text()='Job Title']/following::input[1]") private WebElement jobtitleinput;
+	
+	@FindBy(xpath="//textarea[@placeholder='Type description here']") private WebElement jobdescriptioninput;
+	
+	@FindBy(xpath="//input[@type='file']") private WebElement Browsejobdoc;
+	
+	@FindBy(xpath="//textarea[@placeholder='Add note']") private WebElement Jobnoteinput;
 
 	public void Enterusername(String username) {
 		ca.enterinput(UsernameInput, "Username entered", username);
@@ -191,4 +203,23 @@ public class Adminpage {
 		  ca.WriteExcel(tableData);
 	}
 	
+	public void clickOnjobdropdown() {
+		ca.elmclick(jobdropdown, "Button clicked");
+		ca.elmclick(jobtitle, "value clicked");
+	}
+	
+	public void enterjobdetails(Map<String,String> jobData) {
+		    String jobtitle =jobData.get("Job title");
+		    String jobdescription = jobData.get("Job description");
+		    String jobnote = jobData.get("Note");
+		    String path = jobData.get("job specification");
+		    String fullpath = System.getProperty("user.home")  + "\\" + path;
+		ca.enterinput(jobtitleinput, "Entered job title", jobtitle);
+		ca.enterinput(jobdescriptioninput, "Description entered", jobdescription);
+		Browsejobdoc.sendKeys(fullpath);
+		ca.enterinput(Jobnoteinput, "Entered job note", jobnote);
+		
+	}
+	
+
 }

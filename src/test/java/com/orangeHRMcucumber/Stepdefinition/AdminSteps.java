@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.orangeHRMcucumber.Base.Base;
 import com.orangeHRMcucumber.pages.Adminpage;
+import com.orangeHRMcucumber.utils.Commonactions;
 import com.orangeHRMcucumber.utils.ReadConfig;
 
 import io.cucumber.datatable.DataTable;
@@ -21,11 +22,13 @@ public class AdminSteps {
 	private WebDriver driver;
 	private Adminpage admin;
 	ReadConfig config;
+	private Commonactions ca;
 
-	public AdminSteps(Base base) {
+	public AdminSteps(Base base) throws EncryptedDocumentException, IOException {
 		this.driver = base.getDriver();
 		admin = new Adminpage(driver);
 		config = new ReadConfig();
+		ca = new Commonactions(driver);
 	}
 
 	@Given("user logs into the application")
@@ -147,5 +150,26 @@ public class AdminSteps {
 	public void excel_file_should_contain_all_user_details() {
 	   System.out.println("v");
 	}
+	
+	@Given("user clicks on the job titles")
+	public void user_clicks_on_the_job_titles() {
+	    admin.clickOnjobdropdown();
+	}
+	@When("user clicks on Add button")
+	public void user_clicks_on_Add_button() {
+		admin.clickAddbutton();
+	}
+	@When("user enter the job details")
+	public void user_enter_the_job_details(){
+	 List<Map<String,String>> data = ca.readexceldata();
+	 Map<String,String> jobData = data.get(0);
+	 admin.enterjobdetails(jobData);
+	}
+	@Then("user save the job successfully")
+	public void user_save_the_job_successfully() {
+	    admin.ClickOnSave();
+	   Assert.assertEquals(admin.verifytoastmsg(),"Successfully Saved");
+	}
+
 
 }
