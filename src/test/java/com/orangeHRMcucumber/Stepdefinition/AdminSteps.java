@@ -162,7 +162,7 @@ public class AdminSteps {
 	@When("user enter the job details")
 	public void user_enter_the_job_details(){
 	 List<Map<String,String>> data = ca.readexceldata();
-	 Map<String,String> jobData = data.get(0);
+	 Map<String,String> jobData = data.get(0); 
 	 admin.enterjobdetails(jobData);
 	}
 	@Then("user save the job successfully")

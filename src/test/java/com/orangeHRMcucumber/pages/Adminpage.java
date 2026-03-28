@@ -218,8 +218,6 @@ public class Adminpage {
 		ca.enterinput(jobdescriptioninput, "Description entered", jobdescription);
 		Browsejobdoc.sendKeys(fullpath);
 		ca.enterinput(Jobnoteinput, "Entered job note", jobnote);
-		
 	}
-	
 
 }
