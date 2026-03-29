@@ -1,5 +1,6 @@
 package com.orangeHRMcucumber.Base;
 
+import org.testng.annotations.AfterMethod;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -7,32 +8,37 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import com.orangeHRMcucumber.utils.ReadConfig;
 
+import io.cucumber.java.After;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Base {
 
-	protected WebDriver driver;
-	protected ReadConfig rd = new ReadConfig();
+	private static  ThreadLocal<WebDriver> tldriver = new ThreadLocal<>();
+	private ReadConfig rd = new ReadConfig();
 
 	public void init() {
+		WebDriver driver;
 		String browser = rd.GetBrowser();
-		if (driver != null)
+		if (tldriver.get() != null)
 			return;
 		try {
 			switch (browser.toLowerCase()) {
 			case "chrome":
 				WebDriverManager.chromedriver().setup();
 				driver = new ChromeDriver();
+				tldriver.set(driver);
 				break;
 
 			case "firefox":
 				WebDriverManager.firefoxdriver().setup();
 				driver = new FirefoxDriver();
+				tldriver.set(driver);
 				break;
 
 			case "edge":
 				WebDriverManager.edgedriver().setup();
 				driver = new EdgeDriver();
+				tldriver.set(driver);
 				break;
 
 			default:
@@ -44,14 +50,16 @@ public class Base {
 		}
 	}
 
+	
 	public void tearDown() {
-		if (driver != null) {
-			driver.quit();
+		if (tldriver.get() != null) {
+			tldriver.get().quit(); 
+	        tldriver.remove();
 		}
 	}
 
-	public WebDriver getDriver() {
-		return driver;
+	public static WebDriver getDriver() {
+		return tldriver.get();
 	}
 
 }

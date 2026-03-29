@@ -8,16 +8,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.orangeHRMcucumber.Base.Base;
 import com.orangeHRMcucumber.utils.Commonactions;
 
 public class Loginpage {
-	protected WebDriver driver;
+	private WebDriver driver;
 	protected Commonactions ca;
 
-	public Loginpage(WebDriver driver) throws EncryptedDocumentException, IOException {
-		this.driver = driver;
+	public Loginpage() throws EncryptedDocumentException, IOException {
+		this.driver = Base.getDriver();
 		PageFactory.initElements(driver, this);
-		ca = new Commonactions(driver);
+		ca = new Commonactions();
 	}
 
 	@FindBy(xpath = "//input[@name='username']")
