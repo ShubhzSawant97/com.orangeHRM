@@ -7,6 +7,8 @@ This project is a **Selenium Automation Framework** built for the OrangeHRM appl
 - Selenium WebDriver
 - Cucumber BDD
 - JUnit
+- TestNG
+- TakeScreenShot
 - Maven
 - Page Object Model (POM)
 - Apache POI (Excel data handling)
@@ -19,6 +21,7 @@ This project is a **Selenium Automation Framework** built for the OrangeHRM appl
 - Explicit waits for stable test execution
 - Generic methods for extracting UI table data
 - Data table And Scenrio outline
+- Parrellel Execution
 
 ## Test Scenarios Covered
 - Login functionality
