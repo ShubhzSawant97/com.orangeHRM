@@ -19,7 +19,7 @@ public class Stepdefinition {
 
 	public Stepdefinition(Base base) throws EncryptedDocumentException, IOException {
 		this.driver = base.getDriver();
-		this.lp = new Loginpage(driver);
+		this.lp = new Loginpage();
 	}
 
 	@Given("user is on login page")

@@ -13,18 +13,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.orangeHRMcucumber.Base.Base;
 import com.orangeHRMcucumber.utils.Commonactions;
 
 public class Adminpage {
-	protected WebDriver driver;
-	protected PageFactory pf;
-	protected Commonactions ca;
+	private WebDriver driver;
+	private Commonactions ca;
 
-	public Adminpage(WebDriver driver) throws EncryptedDocumentException, IOException {
-		this.driver = driver;
+	public Adminpage() {
+		this.driver = Base.getDriver();
 		PageFactory.initElements(driver, this);
-		ca = new Commonactions(driver);
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+		ca = new Commonactions();
 	}
 
 	@FindBy(xpath = "//span[text()='Admin']")
@@ -100,6 +99,8 @@ public class Adminpage {
 	@FindBy(xpath="//input[@type='file']") private WebElement Browsejobdoc;
 	
 	@FindBy(xpath="//textarea[@placeholder='Add note']") private WebElement Jobnoteinput;
+	
+	String path = ".//div[@role='cell']";
 
 	public void Enterusername(String username) {
 		ca.enterinput(UsernameInput, "Username entered", username);
@@ -132,19 +133,19 @@ public class Adminpage {
 	public void Userrole(String role) {
 		ca.elmclick(UserRoleDropdown, "Role selected successfully: " + role);
 		By roleOption = By.xpath("//div[@role='listbox']//span[text()='" + role + "']");
-		driver.findElement(roleOption).click();
+		ca.elmclick(driver.findElement(roleOption), "Selected value: " + role);
 	}
 
 	public void EmployeeName(String Employeename) {
 		ca.enterinput(SelectEmployerName, "EmployeeName entered: ", Employeename);
 		By Suggestion = By.xpath("//div[@role='listbox']//span[contains(text(),'" + Employeename + "')]");
-		driver.findElement(Suggestion).click();
+		ca.elmclick(driver.findElement(Suggestion), "Selected value: " + Employeename);
 	}
 
 	public void SelectStatus(String Status) {
 		ca.elmclick(SelectStatus, "Status input field clicked");
 		By statusselection = By.xpath("//div[@role='listbox']//span[text()='" + Status + "']");
-		driver.findElement(statusselection).click();
+		ca.elmclick(driver.findElement(statusselection), "Selected value: " + Status);
 	}
 
 	public void EnterUserName(String username) {
@@ -194,12 +195,12 @@ public class Adminpage {
 	public List<Map<String, String>> adminuserlist(){
 	 List<WebElement> dataRows = userlistrows.subList(1, userlistrows.size());
 
-		return ca.listvalues(userlistrows,headers);
+		return ca.listvalues(userlistrows,headers,path);
 		
 	}
 	
 	public void writetoexcel() throws EncryptedDocumentException, IOException {
-		  List<Map<String,String>> tableData = ca.listvalues(userlistrows, headers);
+		  List<Map<String,String>> tableData = ca.listvalues(userlistrows, headers,path);
 		  ca.WriteExcel(tableData);
 	}
 	

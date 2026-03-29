@@ -1,9 +1,13 @@
 package com.orangeHRMcucumber.hooks;
 
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+
 import com.orangeHRMcucumber.Base.Base;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 
 public class Hooks {
 	private Base base;
@@ -15,12 +19,16 @@ public class Hooks {
 	@Before
 	public void setUp() {
 		base.init();
-		base.getDriver().get("https://opensource-demo.orangehrmlive.com/");
-		base.getDriver().manage().window().maximize();
+		Base.getDriver().get("https://opensource-demo.orangehrmlive.com/");
+		Base.getDriver().manage().window().maximize();
 	}
 
 	@After
-	public void quit() {
+	public void quit(Scenario scenario) {	
+		if (scenario.isFailed()) {
+			final byte[] screenshot = ((TakesScreenshot) base.getDriver()).getScreenshotAs(OutputType.BYTES);
+			scenario.attach(screenshot,"image/png", "Failed_Screenshot_"+scenario.getName());
+		}
 		base.tearDown();
 	}
 

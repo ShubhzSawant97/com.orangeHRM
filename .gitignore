@@ -27,3 +27,17 @@ replay_pid*
 .classpath
 .settings/
 target/
+
+# Maven and Gradle build outputs
+build/
+
+# TestNG/JUnit specific outputs
+test-output/
+temp-output/
+
+# Log files
+*.log
+
+# Cucumber/Extent Reports
+test-report/
+screenshots/

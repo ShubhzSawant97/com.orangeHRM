@@ -24,19 +24,20 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.orangeHRMcucumber.Base.Base;
+
 public class Commonactions {
 	
-	protected WebDriver driver;
+	private WebDriver driver;
 	protected WebDriverWait wait;
 	String path = System.getProperty("user.dir")+ "/src/test/resources/testData/UserData.xlsx";
 	FileInputStream fs;
 	Workbook wb;
 	
-	public Commonactions(WebDriver driver) throws EncryptedDocumentException, IOException {
-		this.driver = driver;
+	public Commonactions() {
+		this.driver = Base.getDriver();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 		wait = new WebDriverWait(driver, Duration.ofSeconds(40));
-		fs = new FileInputStream(path);
-		wb = WorkbookFactory.create(fs);
 	}
 
 	
@@ -85,11 +86,11 @@ public class Commonactions {
 	    return message;
 	}
 		
-		public List<Map<String,String>> listvalues(List<WebElement> rows, List<WebElement> headers){
+		public List<Map<String,String>> listvalues(List<WebElement> rows, List<WebElement> headers, String path){
 		
 			List<Map<String,String>> table = new ArrayList<>();
 			for (WebElement row: rows) {
-				List<WebElement> cells  = wait.until(ExpectedConditions.visibilityOfAllElements( row.findElements(By.xpath(".//div[@role='cell']"))));
+				List<WebElement> cells  = wait.until(ExpectedConditions.visibilityOfAllElements( row.findElements(By.xpath(path))));
 				Map<String,String> data = new LinkedHashMap<>();
 				for(int i =1; i<cells.size();i++) {
 					String header = headers.get(i).getText();
@@ -105,6 +106,8 @@ public class Commonactions {
 		}
 	
 	public void WriteExcel(List<Map<String,String>> data) throws EncryptedDocumentException, IOException {
+		fs = new FileInputStream(path);
+		wb = WorkbookFactory.create(fs);
 		Sheet sheet = wb.getSheet("Sheet1");
 		int rownum = 0;
 		Row header = sheet.createRow(rownum++);
@@ -130,7 +133,9 @@ public class Commonactions {
 		    wb.close();
 	}
 	
-	public List<Map<String,String>>  readexceldata() {
+	public List<Map<String,String>>  readexceldata() throws EncryptedDocumentException, IOException {
+		fs = new FileInputStream(path);
+		wb = WorkbookFactory.create(fs);
 		Sheet sheet = wb.getSheet("Sheet2");
 		List<Map<String,String>> data = new ArrayList<>();
 		Row headerRow = sheet.getRow(0);

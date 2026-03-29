@@ -1,5 +1,5 @@
 Feature: Login
-
+@smoke
   @order1
   Scenario Outline: Login validation
     Given user is on login page

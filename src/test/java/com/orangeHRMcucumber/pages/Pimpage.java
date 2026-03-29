@@ -8,17 +8,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.orangeHRMcucumber.Base.Base;
 import com.orangeHRMcucumber.utils.Commonactions;
 
 public class Pimpage {
-	protected WebDriver driver;
-	protected PageFactory pf;
-	protected Commonactions ca;
+	private WebDriver driver;
+	private Commonactions ca;
 	
-	public Pimpage(WebDriver driver) throws EncryptedDocumentException, IOException {
-		this.driver=driver;
+	public Pimpage() throws EncryptedDocumentException, IOException {
+		this.driver=Base.getDriver();
 		PageFactory.initElements(driver, this);
-		ca = new Commonactions(driver);
+		ca = new Commonactions();
 	}
 	
 	@FindBy(xpath="//span[text()='PIM']") WebElement Pimtab;
