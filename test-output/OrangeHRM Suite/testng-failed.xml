@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite thread-count="2" parallel="methods" name="Failed suite [OrangeHRM Suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="2" parallel="methods" name="Cucumber-Tests(failed)">
+    <classes>
+      <class name="com.orangeHRMcucumber.Runner.Runner">
+        <methods>
+          <include name="setUpClass"/>
+          <include name="tearDownClass"/>
+          <include name="runScenario" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- com.orangeHRMcucumber.Runner.Runner -->
+    </classes>
+  </test> <!-- Cucumber-Tests(failed) -->
+</suite> <!-- Failed suite [OrangeHRM Suite] -->

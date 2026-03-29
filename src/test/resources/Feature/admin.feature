@@ -8,7 +8,7 @@ Feature: Admin functionality
   Scenario: Verify Admin page access
     Then user should be redirected to the Admin page
 
-  @order3
+  @test @order3
   Scenario: Successfully add a new system user
     When user adds the following system users
       | UserRole | EmployeeName | Status  | UserName    | Password  | ConfirmPassword |
@@ -45,7 +45,7 @@ Feature: Admin functionality
     When user writes the records into an Excel file
     Then Excel file should contain all user details
 
-  @smoke @order8
+  @test @smoke @order8
   Scenario: User create new job
     Given user clicks on the job titles
     When user clicks on Add button

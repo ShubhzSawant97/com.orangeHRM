@@ -24,11 +24,11 @@ public class AdminSteps {
 	ReadConfig config;
 	private Commonactions ca;
 
-	public AdminSteps(Base base) throws EncryptedDocumentException, IOException {
-		this.driver = base.getDriver();
-		admin = new Adminpage(driver);
+	public AdminSteps(Base base) {
+		this.driver = Base.getDriver();
+		admin = new Adminpage();
 		config = new ReadConfig();
-		ca = new Commonactions(driver);
+		ca = new Commonactions();
 	}
 
 	@Given("user logs into the application")
@@ -160,7 +160,7 @@ public class AdminSteps {
 		admin.clickAddbutton();
 	}
 	@When("user enter the job details")
-	public void user_enter_the_job_details(){
+	public void user_enter_the_job_details() throws EncryptedDocumentException, IOException{
 	 List<Map<String,String>> data = ca.readexceldata();
 	 Map<String,String> jobData = data.get(0); 
 	 admin.enterjobdetails(jobData);
