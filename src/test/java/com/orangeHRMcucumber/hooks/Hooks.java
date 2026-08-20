@@ -19,8 +19,8 @@ public class Hooks {
 	@Before
 	public void setUp() {
 		base.init();
-		Base.getDriver().get("https://opensource-demo.orangehrmlive.com/");
-		Base.getDriver().manage().window().maximize();
+		base.getDriver().get("https://opensource-demo.orangehrmlive.com/");
+		base.getDriver().manage().window().maximize();
 	}
 
 	@After

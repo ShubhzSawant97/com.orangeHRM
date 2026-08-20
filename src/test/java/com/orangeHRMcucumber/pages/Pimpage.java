@@ -15,10 +15,10 @@ public class Pimpage {
 	private WebDriver driver;
 	private Commonactions ca;
 	
-	public Pimpage() throws EncryptedDocumentException, IOException {
-		this.driver=Base.getDriver();
+	public Pimpage(Base base) throws EncryptedDocumentException, IOException {
+		this.driver=base.getDriver();
 		PageFactory.initElements(driver, this);
-		ca = new Commonactions();
+		ca = new Commonactions(driver);
 	}
 	
 	@FindBy(xpath="//span[text()='PIM']") WebElement Pimtab;

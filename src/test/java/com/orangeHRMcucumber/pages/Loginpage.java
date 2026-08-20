@@ -15,10 +15,10 @@ public class Loginpage {
 	private WebDriver driver;
 	protected Commonactions ca;
 
-	public Loginpage() throws EncryptedDocumentException, IOException {
-		this.driver = Base.getDriver();
+	public Loginpage(Base base) throws EncryptedDocumentException, IOException {
+		this.driver = base.getDriver();
 		PageFactory.initElements(driver, this);
-		ca = new Commonactions();
+		ca = new Commonactions(driver);
 	}
 
 	@FindBy(xpath = "//input[@name='username']")

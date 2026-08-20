@@ -3,7 +3,8 @@
 <suite name="OrangeHRM Suite" parallel="methods" thread-count="2">
   <test thread-count="5" name="Cucumber-Tests">
     <classes>
-      <class name="com.orangeHRMcucumber.Runner.Runner"/>
+     <class name="com.orangeHRMcucumber.Runner.RunnerTest"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
+ 

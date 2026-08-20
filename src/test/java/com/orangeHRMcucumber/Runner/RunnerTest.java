@@ -12,16 +12,16 @@ import io.cucumber.testng.CucumberOptions;
 		features = "src/test/resources/Feature",
 		glue = {"com.orangeHRMcucumber"},
 		dryRun = false ,
-		tags = "@test",
+		// tags = "@smoke",
 		monochrome = false,
 		plugin = {"pretty", 
         "html:target/cucumber-report.html",
         "json:target/cucumber.json"}
 		)
 
-public class Runner extends AbstractTestNGCucumberTests {
+public class RunnerTest extends AbstractTestNGCucumberTests {
 	@Override
-    @DataProvider(parallel = true)
+    @DataProvider(parallel = false)
     public Object[][] scenarios() {
         return super.scenarios();
     }

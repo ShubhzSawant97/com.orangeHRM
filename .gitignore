@@ -40,4 +40,4 @@ temp-output/
 
 # Cucumber/Extent Reports
 test-report/
-screenshots/
+screenshots/.DS_Store

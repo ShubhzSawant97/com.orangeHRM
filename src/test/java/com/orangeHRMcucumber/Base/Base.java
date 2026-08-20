@@ -1,6 +1,5 @@
 package com.orangeHRMcucumber.Base;
 
-import org.testng.annotations.AfterMethod;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -8,7 +7,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import com.orangeHRMcucumber.utils.ReadConfig;
 
-import io.cucumber.java.After;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Base {
@@ -17,7 +15,7 @@ public class Base {
 	private ReadConfig rd = new ReadConfig();
 
 	public void init() {
-		WebDriver driver;
+		WebDriver driver; 
 		String browser = rd.GetBrowser();
 		if (tldriver.get() != null)
 			return;
@@ -58,7 +56,7 @@ public class Base {
 		}
 	}
 
-	public static WebDriver getDriver() {
+	public WebDriver getDriver() {
 		return tldriver.get();
 	}
 

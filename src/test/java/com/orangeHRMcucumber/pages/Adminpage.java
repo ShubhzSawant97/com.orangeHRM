@@ -1,8 +1,7 @@
 package com.orangeHRMcucumber.pages;
 
 import java.io.IOException;
-import java.time.Duration;
-import java.util.ArrayList;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
@@ -15,15 +14,18 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.orangeHRMcucumber.Base.Base;
 import com.orangeHRMcucumber.utils.Commonactions;
+import com.orangeHRMcucumber.utils.ExcelUtils;
 
 public class Adminpage {
 	private WebDriver driver;
 	private Commonactions ca;
+	private ExcelUtils excel;
 
-	public Adminpage() {
-		this.driver = Base.getDriver();
+	public Adminpage(Base base) {
+		this.driver = base.getDriver();
 		PageFactory.initElements(driver, this);
-		ca = new Commonactions();
+		ca = new Commonactions(driver);
+		excel = new ExcelUtils();
 	}
 
 	@FindBy(xpath = "//span[text()='Admin']")
@@ -115,7 +117,7 @@ public class Adminpage {
 	}
 
 	public void clickAdmintab() {
-		ca.elmclick(Admintab, "Adminoption clicked");
+		ca.elmclick(Admintab, "Admin option clicked");
 	}
 
 	public void clickAddbutton() {
@@ -201,7 +203,7 @@ public class Adminpage {
 	
 	public void writetoexcel() throws EncryptedDocumentException, IOException {
 		  List<Map<String,String>> tableData = ca.listvalues(userlistrows, headers,path);
-		  ca.WriteExcel(tableData);
+		  excel.WriteExcel(tableData);
 	}
 	
 	public void clickOnjobdropdown() {
@@ -214,7 +216,8 @@ public class Adminpage {
 		    String jobdescription = jobData.get("Job description");
 		    String jobnote = jobData.get("Note");
 		    String path = jobData.get("job specification");
-		    String fullpath = System.getProperty("user.home")  + "\\" + path;
+		    String fullpath = Paths.get(
+        System.getProperty("user.home"),path).toString();
 		ca.enterinput(jobtitleinput, "Entered job title", jobtitle);
 		ca.enterinput(jobdescriptioninput, "Description entered", jobdescription);
 		Browsejobdoc.sendKeys(fullpath);

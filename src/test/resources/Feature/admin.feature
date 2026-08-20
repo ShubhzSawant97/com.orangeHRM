@@ -33,7 +33,7 @@ Feature: Admin functionality
 
   @order6
   Scenario: Delete the user
-    Given user Enters the  username "Abdulhakee1"
+    Given user Enters the  username "jonnie"
     When user clicks on search button
     And user clicks on delete button for the selected user
     And user confirms the delete action

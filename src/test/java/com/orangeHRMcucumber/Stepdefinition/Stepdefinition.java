@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import org.apache.poi.EncryptedDocumentException;
 import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 
 import com.orangeHRMcucumber.Base.Base;
 import com.orangeHRMcucumber.pages.Loginpage;
@@ -14,12 +13,10 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class Stepdefinition {
-	private WebDriver driver;
 	private Loginpage lp;
 
 	public Stepdefinition(Base base) throws EncryptedDocumentException, IOException {
-		this.driver = base.getDriver();
-		this.lp = new Loginpage();
+		this.lp = new Loginpage(base);
 	}
 
 	@Given("user is on login page")

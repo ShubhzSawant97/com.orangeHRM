@@ -6,11 +6,10 @@ import java.util.Map;
 
 import org.apache.poi.EncryptedDocumentException;
 import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 
 import com.orangeHRMcucumber.Base.Base;
 import com.orangeHRMcucumber.pages.Adminpage;
-import com.orangeHRMcucumber.utils.Commonactions;
+import com.orangeHRMcucumber.utils.ExcelUtils;
 import com.orangeHRMcucumber.utils.ReadConfig;
 
 import io.cucumber.datatable.DataTable;
@@ -19,16 +18,15 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class AdminSteps {
-	private WebDriver driver;
 	private Adminpage admin;
 	ReadConfig config;
-	private Commonactions ca;
+	private ExcelUtils excel;
 
-	public AdminSteps(Base base) {
-		this.driver = Base.getDriver();
-		admin = new Adminpage();
+
+	public AdminSteps(Base base) throws EncryptedDocumentException, IOException {
+		admin = new Adminpage(base);
 		config = new ReadConfig();
-		ca = new Commonactions();
+		excel = new ExcelUtils();	
 	}
 
 	@Given("user logs into the application")
@@ -161,7 +159,7 @@ public class AdminSteps {
 	}
 	@When("user enter the job details")
 	public void user_enter_the_job_details() throws EncryptedDocumentException, IOException{
-	 List<Map<String,String>> data = ca.readexceldata();
+	 List<Map<String,String>> data = excel.readexceldata();
 	 Map<String,String> jobData = data.get(0); 
 	 admin.enterjobdetails(jobData);
 	}
