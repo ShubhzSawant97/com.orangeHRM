@@ -5,7 +5,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
+import java.nio.file.Paths;
 import org.apache.poi.EncryptedDocumentException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -103,11 +103,11 @@ public class Adminpage {
 	String path = ".//div[@role='cell']";
 
 	public void Enterusername(String username) {
-		ca.enterinput(UsernameInput, "Username entered", username);
+		ca.enterinput(UsernameInput, username);
 	}
 
 	public void Enterpassword(String password) {
-		ca.enterinput(PasswordInput, "Password entered", password);
+		ca.enterinput(PasswordInput, password);
 	}
 
 	public void logintoapp() {
@@ -137,7 +137,7 @@ public class Adminpage {
 	}
 
 	public void EmployeeName(String Employeename) {
-		ca.enterinput(SelectEmployerName, "EmployeeName entered: ", Employeename);
+		ca.enterinput(SelectEmployerName, Employeename);
 		By Suggestion = By.xpath("//div[@role='listbox']//span[contains(text(),'" + Employeename + "')]");
 		ca.elmclick(driver.findElement(Suggestion), "Selected value: " + Employeename);
 	}
@@ -149,15 +149,15 @@ public class Adminpage {
 	}
 
 	public void EnterUserName(String username) {
-		ca.enterinput(SelectUserName, "Username Entered: ", username);
+		ca.enterinput(SelectUserName,  username);
 	}
 
 	public void EnterUserPassword(String pass) {
-		ca.enterinput(SelectPassword, "Password Entered: ", pass);
+		ca.enterinput(SelectPassword, pass);
 	}
 
 	public void EnterUserConfirmPassword(String confirmpass) {
-		ca.enterinput(SelectConfirmPassword, "Confirm Password Entered: ", confirmpass);
+		ca.enterinput(SelectConfirmPassword, confirmpass);
 	}
 
 	public void ClickOnSave() {
@@ -214,11 +214,12 @@ public class Adminpage {
 		    String jobdescription = jobData.get("Job description");
 		    String jobnote = jobData.get("Note");
 		    String path = jobData.get("job specification");
-		    String fullpath = System.getProperty("user.home")  + "\\" + path;
-		ca.enterinput(jobtitleinput, "Entered job title", jobtitle);
-		ca.enterinput(jobdescriptioninput, "Description entered", jobdescription);
+		    String fullpath = Paths.get(
+        System.getProperty("user.home"),path).toString();
+		ca.enterinput(jobtitleinput, jobtitle);
+		ca.enterinput(jobdescriptioninput, jobdescription);
 		Browsejobdoc.sendKeys(fullpath);
-		ca.enterinput(Jobnoteinput, "Entered job note", jobnote);
+		ca.enterinput(Jobnoteinput,jobnote);
 	}
 
 }

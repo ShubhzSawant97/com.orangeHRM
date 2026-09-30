@@ -34,13 +34,6 @@
 			<version>7.18.1</version>
 		</dependency>
 
-		<!-- Optional but recommended -->
-		<dependency>
-			<groupId>io.cucumber</groupId>
-			<artifactId>cucumber-picocontainer</artifactId>
-			<version>7.18.1</version>
-		</dependency>
-
 		<!-- JUnit 4 (used for Cucumber runner) -->
 		<dependency>
 			<groupId>junit</groupId>

@@ -47,11 +47,11 @@ public class Loginpage {
 	}
 
 	public void Enterusername(String username) {
-		ca.enterinput(UsernameInput, "Username Entered", username);
+		ca.enterinput(UsernameInput,  username);
 	}
 
 	public void EnterPassword(String password) {
-		ca.enterinput(PasswordInput, "Password Entered", password);
+		ca.enterinput(PasswordInput, password);
 	}
 
 	public boolean VerifyHomeUrl() {

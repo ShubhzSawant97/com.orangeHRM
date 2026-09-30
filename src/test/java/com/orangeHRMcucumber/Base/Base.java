@@ -13,14 +13,14 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Base {
 
-	private static  ThreadLocal<WebDriver> tldriver = new ThreadLocal<>();
+	private static ThreadLocal<WebDriver> tldriver = new ThreadLocal<>();
 	private ReadConfig rd = new ReadConfig();
 
 	public void init() {
 		WebDriver driver;
 		String browser = rd.GetBrowser();
 		if (tldriver.get() != null)
-			return;
+			return;	
 		try {
 			switch (browser.toLowerCase()) {
 			case "chrome":

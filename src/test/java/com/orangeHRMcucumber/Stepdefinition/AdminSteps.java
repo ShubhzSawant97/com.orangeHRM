@@ -171,5 +171,4 @@ public class AdminSteps {
 	   Assert.assertEquals(admin.verifytoastmsg(),"Successfully Saved");
 	}
 
-
 }

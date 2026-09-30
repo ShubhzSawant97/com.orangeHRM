@@ -50,7 +50,7 @@ public class Commonactions {
 		}
 	}
 	
-	public void enterinput(WebElement elm, String msg, String value) {
+	public void enterinput(WebElement elm, String value) {
 		try {
 		wait.until(ExpectedConditions.visibilityOf(elm));
 		elm.clear();
