@@ -17,9 +17,9 @@ import io.cucumber.testng.CucumberOptions;
         "json:target/cucumber.json"}
 		)
 
-public class Runner extends AbstractTestNGCucumberTests {
+public class RunnerTest extends AbstractTestNGCucumberTests {
 	@Override
-    @DataProvider(parallel = true)
+    @DataProvider(parallel = false)
     public Object[][] scenarios() {
         return super.scenarios();
     }
